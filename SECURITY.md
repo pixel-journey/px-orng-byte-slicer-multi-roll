@@ -1,10 +1,9 @@
-# Security
+# Security notes — byte slicer
 
-| Surface | Closed by |
+| Mitigated | Behavior |
 | --- | --- |
-| Short or non-hex checksum | refused |
-| Ninth roll from the same 32 bytes | count > 8 refused |
-| Modulo bias | reject tail of 2^32 |
-| Cross-slice coupling | isolation check |
+| Bad checksum | refused |
+| Bad index/count/modulus | refused |
+| Biased mod | reject |
 
-Not claimed: live ORNG delivery, chained sub-seeds (Fisher-Yates is quest 008), wasm.
+Production: still need once-only oracle resolve before trusting the checksum.

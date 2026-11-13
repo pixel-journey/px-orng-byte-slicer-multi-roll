@@ -1,16 +1,22 @@
-# Slice one checksum256 into independent rolls
+# Slice one checksum256 into up to eight uint32 rolls
 
-> **Domain:** WAX ORNG — multi-roll from one entropy  
-> **Catalog:** [px-contract-examples-vault](https://github.com/pixel-journey/px-contract-examples-vault)  
+> **Domain:** WAX ORNG — multi-roll entropy  
+> **Sources:** [SOURCES.md](SOURCES.md)  
 > **Path:** [ORNG-LEARNING-PATH.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
 
-**Goal:** One 64-hex checksum is eight big-endian uint32 slices. `sliceRolls(hex, count, modulus)` returns `count` rolls in `0..modulus-1`. A value in the leftover tail of `2^32` is `"reject"` so the modulus is not biased.
+**Goal:** Non-overlapping big-endian uint32 slices from a 64-hex checksum, each optionally rejection-sampled into `0..modulus-1`. Slices are independent.
 
-Flipping bytes in slice `j` does not change slice `i` — independent sub-rolls from one oracle delivery.
+**Code under test:** `npm test`. No live `orng.wax`.
 
-**Code under test:** `npm test`. No live `orng.wax`, no wasm.
+## Learning materials
 
-**Official RNG:** [wax-orng](https://github.com/worldwide-asset-exchange/wax-orng).
+| Doc | Role |
+| --- | --- |
+| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Slice, isolate, reject |
+| [TIPS.md](TIPS.md) | Independent vs chained |
+| [SECURITY.md](SECURITY.md) | Bounds |
+| [SOURCES.md](SOURCES.md) | Official |
 
 ```bash
 npm test
