@@ -1,22 +1,12 @@
-# Slice one checksum256 into up to eight uint32 rolls
+# Independent uint32 rolls from one checksum256
 
-> **Domain:** WAX ORNG — multi-roll entropy  
-> **Sources:** [SOURCES.md](SOURCES.md)  
-> **Path:** [ORNG-LEARNING-PATH.md](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
-
-**Goal:** Non-overlapping big-endian uint32 slices from a 64-hex checksum, each optionally rejection-sampled into `0..modulus-1`. Slices are independent.
-
-**Code under test:** `npm test`. No live `orng.wax`.
-
-## Learning materials
+Slice a 32-byte ORNG-style value into up to eight non-overlapping windows and map each with rejection sampling. Pure TypeScript; checksum is an argument, not a live orng call.
 
 | Doc | Role |
 | --- | --- |
-| [EDUCATION.md](EDUCATION.md) | Beginner → masterclass |
-| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | Slice, isolate, reject |
-| [TIPS.md](TIPS.md) | Independent vs chained |
-| [SECURITY.md](SECURITY.md) | Bounds |
-| [SOURCES.md](SOURCES.md) | Official |
+| [EDUCATION.md](EDUCATION.md) | Isolation + rejection |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | FULL checksum windows |
+| [SOURCES.md](SOURCES.md) | orng / Antelope context |
 
 ```bash
 npm test
