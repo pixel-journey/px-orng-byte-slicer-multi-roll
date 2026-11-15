@@ -1,9 +1,5 @@
-# Security notes — byte slicer
+# Security
 
-| Mitigated | Behavior |
-| --- | --- |
-| Bad checksum | refused |
-| Bad index/count/modulus | refused |
-| Biased mod | reject |
+Closed: bad checksum, bad index, bad count, bad modulus, out-of-range uint32, rejection tail.
 
-Production: still need once-only oracle resolve before trusting the checksum.
+Not closed: no proof the checksum came from `orng.wax`; no once-only job id.

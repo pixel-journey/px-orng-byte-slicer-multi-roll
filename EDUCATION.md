@@ -1,28 +1,22 @@
-# Education — multi-roll from one checksum256
-
-> **Rung:** `npm test` passes. One 32-byte value → up to eight uint32 slices.  
-> Useful when a single oracle resolve must drive several independent faces.
-
-## What you should be able to do
-
-| Level | Skill |
-| --- | --- |
-| Beginner | Slice index `i` → bytes `[8i .. 8i+7]` as big-endian uint32 |
-| Intermediate | Rejection-sample each slice into `0..modulus-1` |
-| Masterclass | Isolation: flipping another slice must not change this one |
+# Education — multi-roll from one seed
 
 ## Beginner
 
-A `checksum256` is 64 hex characters. Eight non-overlapping windows of 8 hex digits each yield eight uint32 values.
+One ORNG result is 32 bytes. Eight uint32 slices let a single request drive several independent rolls (dice, loot, sub-bets) without a second network round.
 
 ## Intermediate
 
-`rollFromUint32` rejects the top of the `2^32` range so `value % modulus` is unbiased. A reject on one slice does not rewrite others — product policy decides whether to rerequest the whole job.
+Slices do not share bytes. Each window is 4 bytes. A fair mod still needs a rejection tail when the range does not divide `2^32`.
 
-## Masterclass
+Count is 1..8. A game that needs 9 independent values must chain a second seed (see Fisher–Yates) or request again.
 
-`isolated()` in tests proves changing another window leaves slice `i` unchanged. Do not re-hash between slices unless you intentionally want dependence (Fisher–Yates chains hashes on purpose).
+## Masterclass (not in this repo)
 
-## Will not teach
+- On-chain `sha256` to derive sub-seeds instead of fixed windows.
+- Paying a multi-outcome bet from the slice vector.
 
-Game payouts or oracle delivery — see dice/coinflip after slicing.
+## Outcomes
+
+1. Draw the 8 windows on a 64-hex string.
+2. Show why modulus 100 rejects the top of the uint32 range.
+3. Prove isolation: flip slice 3, slice 0 is unchanged.
