@@ -1,5 +1,11 @@
-# Security
+# Security — byte slicer
 
-Closed: bad checksum, bad index, bad count, bad modulus, out-of-range uint32, rejection tail.
+## Closed in tests
 
-Not closed: no proof the checksum came from `orng.wax`; no once-only job id.
+Bad checksum/count/index/modulus; U32 tail reject; isolation; determinism.
+
+## Not closed
+
+Oracle auth, economic multi-bet solvency, live delivery.
+
+No `orng.wax` in this repository.

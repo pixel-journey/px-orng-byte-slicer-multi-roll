@@ -1,12 +1,14 @@
-# Independent uint32 rolls from one checksum256
+# Byte slicer — up to 8 uint32 rolls from one checksum
 
-Slice a 32-byte ORNG-style value into up to eight non-overlapping windows and map each with rejection sampling. Pure TypeScript; checksum is an argument, not a live orng call.
+Educational non-overlapping windows + rejection sampling. Pure TypeScript.
 
 | Doc | Role |
 | --- | --- |
-| [EDUCATION.md](EDUCATION.md) | Isolation + rejection |
-| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | FULL checksum windows |
-| [SOURCES.md](SOURCES.md) | orng / Antelope context |
+| [EDUCATION.md](EDUCATION.md) | Windows + isolation |
+| [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md) | FULL checksum table |
+| [TIPS.md](TIPS.md) | Multi-bet design |
+| [SECURITY.md](SECURITY.md) | Gaps |
+| [SOURCES.md](SOURCES.md) | Links |
 
 ```bash
 npm test

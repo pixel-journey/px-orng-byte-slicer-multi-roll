@@ -1,27 +1,56 @@
-# Education — multi-roll from one checksum
+# Education — multi-roll from one checksum256
 
-One `checksum256` (32 bytes) can feed several independent uint32 windows without overlapping bytes. This lab slices up to **8** windows and maps each through rejection sampling for a chosen modulus.
+> **Rung:** `npm test` passes. One 32-byte checksum feeds up to **8** non-overlapping uint32 windows. No `orng.wax` call.  
+> **The test is the rule.**
+
+Use this when a single oracle delivery should drive several independent rolls (multi-bet, multi-loot, multi-stat) without requesting eight separate jobs.
+
+## Learning outcomes
+
+| Level | After this file |
+| --- | --- |
+| Beginner | Eight windows; count 1..8 |
+| Intermediate | Isolation + rejection sampling per window |
+| Masterclass | When to prefer one job vs many jobs |
+
+---
 
 ## Beginner
 
-1. A 64-hex checksum is eight consecutive 4-byte words.
-2. `sliceUint32(i)` reads window `i` only.
-3. Count must be 1..8.
+A 64-hex checksum is eight consecutive 4-byte words. Test `FULL` is blocks `00000000` … `77777777`.
+
+| Slice index | `sliceUint32(FULL, i)` |
+| --- | --- |
+| 0 | 0 |
+| 7 | 0x77777777 |
+
+Count 0 or 9 → `bad count`. Count 1..8 ok.
 
 ## Intermediate
 
-Rejection sampling: accept only values below the largest multiple of the modulus that fits in 2^32. Values at the limit and above return `"reject"` — do not use naive `uint32 % mod` over the full range.
+Each window maps through rejection sampling for a chosen modulus (e.g. 100). The U32 tail returns `"reject"` — same fairness rule as loot/dice.
 
-Changing another window must not change this window (`isolated`).
+**Isolation:** changing another slice does not change this one. Same checksum + modulus → deterministic `sliceRolls` array.
 
-## Masterclass (not in this repo)
+Uppercase hex normalizes to the same uint32 as lowercase.
 
-Live `orng.wax` delivery of the checksum; multi-bet settlement; WASM host sha256.
+### Shape refusals
 
-## Outcomes
+| Input | Error |
+| --- | --- |
+| short / non-hex / odd length | bad checksum |
+| index -1 or 8 | bad index |
+| modulus 1 or > 1_000_000 | bad modulus |
+| uint32 out of range | bad uint32 |
 
-1. Read windows 0 and 7 from the test FULL checksum.
-2. Show modulus 100 rejection at the U32 tail.
-3. Show bad count 0/9 and bad checksum shapes.
+## Masterclass — product angles
+
+| Design | Tradeoff |
+| --- | --- |
+| One `requestrand`, eight rolls | Cheaper credits; correlated seed (same delivery) |
+| Eight jobs | Independent entropy; 8× cost and callback surface |
+| Reject one window | Policy: rerequest whole checksum vs only that roll |
+
+Nice-to-have (not in repo): stream more than 8 windows by hashing the checksum into a chain of sub-seeds ([Fisher–Yates](https://github.com/pixel-journey/px-orng-fisher-yates-deck-shuffler) pattern).
 
 Numbers: [WORKED-EXAMPLES.md](WORKED-EXAMPLES.md).
