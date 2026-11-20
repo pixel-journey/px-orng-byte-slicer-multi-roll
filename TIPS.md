@@ -27,4 +27,4 @@
 | Feed slices into a CDF | [loot table](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) |
 | Deck from chained hashes | [Fisher–Yates](https://github.com/pixel-journey/px-orng-fisher-yates-deck-shuffler) |
 
-Related: [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) · [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) · [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md)
+Related: [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) · [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) · `px-contract-examples-vault` (private index; not this public course)

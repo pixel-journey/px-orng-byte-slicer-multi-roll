@@ -21,4 +21,4 @@
 | [loot CDF](https://github.com/pixel-journey/px-orng-weighted-loot-table-cdf) | Feed a slice into weighted bands |
 | [Fisher–Yates](https://github.com/pixel-journey/px-orng-fisher-yates-deck-shuffler) | Chained sub-seeds (not independent windows) |
 | [dice](https://github.com/pixel-journey/px-orng-dice-multi-tier-payout) | Single-modulus game book |
-| [ORNG path](https://github.com/pixel-journey/px-contract-examples-vault/blob/main/docs/ORNG-LEARNING-PATH.md) | Curriculum + reject windows |
+| `px-contract-examples-vault` (private index; not this public course) | Curriculum + reject windows |
